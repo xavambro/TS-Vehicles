@@ -14,15 +14,18 @@
     <form id="addCar row">
         <div class="form-group col-md-2">
           <label for="plate">Plate</label>
-          <input type="text" class="form-control form-control-sm" id="plate" name="plate" aria-describedby="emailHelp">
+          <input type="text" class="form-control form-control-sm" id="plate" name="plate">
+          <div class="invalid-feedback" id="errorPlate"></div>
         </div>
         <div class="form-group col-md-2">
           <label for="brand">Brand</label>
-          <input type="text" class="form-control form-control-sm" name="brand" id="brand" >
+          <input type="text" class="form-control form-control-sm" name="brand" id="brand">
+          <div class="invalid-feedback" id="errorBrand"></div>
         </div>
         <div class="form-group col-md-2">
             <label for="color">Color</label>
             <input type="text" class="form-control form-control-sm" name="color" id="color">
+            <div class="invalid-feedback" id="errorColor"></div>
           </div>
         <br>
         <button type="button" onclick="createCar(formCar.plate.value,formCar.brand.value,formCar.color.value)" class="btn btn-primary">Create car</button>
@@ -31,42 +34,57 @@
       <form id="addWheels row" class="d-none">
         <div class="form-group col-md-2">
           <label for="wheelBrand1">Wheel 1 Brand:</label>
-          <input type="text" class="form-control form-control-sm" id="wheelBrand1" name="wheelBrand1" aria-describedby="emailHelp">
+          <input type="text" class="form-control form-control-sm" id="wheelBrand1" name="wheelBrand1">
+          <div class="invalid-feedback" id="errorWheel1Brand"></div>
         </div>
         <div class="form-group col-md-2">
             <label for="wheel1Diameter">Wheel 1 Diameter</label>
-            <input type="text" class="form-control form-control-sm" id="wheel1Diameter" name="wheel1Diameter" aria-describedby="emailHelp">
+            <input type="text" class="form-control form-control-sm" id="wheel1Diameter" name="wheel1Diameter">
+            <div class="invalid-feedback" id="errorWheel1Diameter"></div>
+
           </div>
           <div class="form-group col-md-2">
             <label for="wheelBrand2">Wheel 2 Brand</label>
-            <input type="text" class="form-control form-control-sm" id="wheelBrand2" name="wheelBrand2" aria-describedby="emailHelp">
+            <input type="text" class="form-control form-control-sm" id="wheelBrand2" name="wheelBrand2" >
+            <div class="invalid-feedback" id="errorWheel2Brand"></div>
+
           </div>
           <div class="form-group col-md-2">
             <label for="wheel2Diameter">Wheel 2 Diameter</label>
-            <input type="text" class="form-control form-control-sm" id="wheel2Diameter" name="wheel2Diameter" aria-describedby="emailHelp">
+            <input type="text" class="form-control form-control-sm" id="wheel2Diameter" name="wheel2Diameter">
+            <div class="invalid-feedback" id="errorWheel2Diameter"></div>
+
           </div>
           <div class="form-group col-md-2">
             <label for="wheelBrand3">Wheel 3 Brand</label>
-            <input type="text" class="form-control form-control-sm" id="wheelBrand3" name="wheelBrand3" aria-describedby="emailHelp">
+            <input type="text" class="form-control form-control-sm" id="wheelBrand3" name="wheelBrand3">
+            <div class="invalid-feedback" id="errorWheel3Brand"></div>
+
           </div>
           <div class="form-group col-md-2">
             <label for="wheel3Diameter">Wheel 3 Diameter</label>
-            <input type="text" class="form-control form-control-sm" id="wheel3Diameter" name="wheel3Diameter" aria-describedby="emailHelp">
+            <input type="text" class="form-control form-control-sm" id="wheel3Diameter" name="wheel3Diameter">
+            <div class="invalid-feedback" id="errorWheel3Diameter"></div>
+
           </div>
           <div class="form-group col-md-2">
             <label for="wheelBrand4">Wheel 4 Brand</label>
-            <input type="text" class="form-control form-control-sm" id="wheelBrand4" name="wheelBrand4" aria-describedby="emailHelp">
+            <input type="text" class="form-control form-control-sm" id="wheelBrand4" name="wheelBrand4">
+            <div class="invalid-feedback" id="errorWheel4Brand"></div>
+
           </div>
           <div class="form-group col-md-2">
             <label for="wheel4Diameter">Wheel 4 Diameter</label>
-            <input type="text" class="form-control form-control-sm" id="wheel4Diameter" name="wheel4Diameter" aria-describedby="emailHelp">
+            <input type="text" class="form-control form-control-sm" id="wheel4Diameter" name="wheel4Diameter">
+            <div class="invalid-feedback" id="errorWheel4diameter"></div>
+
           </div>
         
         <br>
         <button type="button" onclick="createWheels(formWheels.wheelBrand1.value,formWheels.wheel1Diameter.value,formWheels.wheelBrand2.value,formWheels.wheel2Diameter.value,formWheels.wheelBrand3.value,formWheels.wheel3Diameter.value,formWheels.wheelBrand4.value,formWheels.wheel4Diameter.value)" class="btn btn-primary">Create car</button>
       </form>
 
-      <p id="carInfo"></p>
+      <div id="carInfo"></div>
       </div>
 
       <script src="../models/car.js"></script>
