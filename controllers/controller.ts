@@ -2,6 +2,7 @@ let formCar: HTMLFormElement = document.forms[0];
 let formWheels: HTMLFormElement = document.forms[1];
 let carInfo:any = document.getElementById('carInfo');
 let car:Car
+let Cars:Car[]
 
 function createCar(plate:string,brand:string,color:string):void {
     let errors:number = 0;
@@ -52,6 +53,7 @@ function createWheels(wheel1b:string,wheel1d:number,wheel2b:string,wheel2d:numbe
         for (let i:number = 0;i < wheels.length;i++){
             car.addWheel(wheels[i]);
         }
+        
         showCar(car);
 
     }

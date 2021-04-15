@@ -3,6 +3,7 @@ var formCar = document.forms[0];
 var formWheels = document.forms[1];
 var carInfo = document.getElementById('carInfo');
 var car;
+var Cars;
 function createCar(plate, brand, color) {
     var errors = 0;
     if (!validPlate(plate)) {
@@ -50,7 +51,8 @@ function createWheels(wheel1b, wheel1d, wheel2b, wheel2d, wheel3b, wheel3d, whee
     }
 }
 function showCar(car) {
-    var statsList = document.createElement('ul');
+    var carInf = document.createElement('ul');
+    carInf.className = "car border border-success rounded";
     var plate = document.createElement('li');
     plate.textContent = "CAR PLATE: " + car.plate;
     var brand = document.createElement('li');
@@ -63,8 +65,8 @@ function showCar(car) {
         li.textContent = "WHEEL " + index + " BRAND: " + wheel.brand + " WHEEL DIAMETER: " + wheel.diameter;
         wheels.appendChild(li);
     });
-    statsList.append(plate, brand, color, wheels);
-    carInfo.appendChild(statsList);
+    carInf.append(plate, brand, color, wheels);
+    carInfo.appendChild(carInf);
 }
 //Función para mostrar error a la hora de validar los campos
 function showErrors(input, error, message) {
