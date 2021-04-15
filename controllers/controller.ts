@@ -1,8 +1,10 @@
 let formCar: HTMLFormElement = document.forms[0];
 let formWheels: HTMLFormElement = document.forms[1];
 let carInfo:any = document.getElementById('carInfo');
-let car:Car
-let Cars:Car[]
+
+let car:Car;
+let cars: Car[] = [];
+
 
 function createCar(plate:string,brand:string,color:string):void {
     let errors:number = 0;
@@ -22,7 +24,8 @@ function createCar(plate:string,brand:string,color:string):void {
 function createWheels(wheel1b:string,wheel1d:number,wheel2b:string,wheel2d:number,wheel3b:string,wheel3d:number,wheel4b:string,wheel4d:number):void {
     let errors:number =0;
     let wheels: Wheel[] = [];
-    
+    let inputs: HTMLCollectionOf<HTMLInputElement>;
+
     if(!validDiameter(wheel1d)){
         showErrors(document.getElementById("wheel1Diameter"),"errorWheel1Diameter","Diàmetro incorrecto, ha de ser entre 0.4 y 2");
         errors++;
@@ -53,7 +56,14 @@ function createWheels(wheel1b:string,wheel1d:number,wheel2b:string,wheel2d:numbe
         for (let i:number = 0;i < wheels.length;i++){
             car.addWheel(wheels[i]);
         }
-        
+        cars.push(car);
+        inputs = document.getElementsByTagName("input");
+        //Reseteamos los valores de los inputs
+        for (let i =0; i < inputs.length; i++){
+            inputs[i].value = ''
+        }
+        formCar.className = "";
+        formWheels.className = "d-none";
         showCar(car);
 
     }
@@ -61,27 +71,34 @@ function createWheels(wheel1b:string,wheel1d:number,wheel2b:string,wheel2d:numbe
 }
 
 function showCar(car:Car):void{
+
     let statsList = document.createElement('ul');
+    statsList.className = "car border border-success rounded"
     let plate = document.createElement('li');
     plate.textContent = `CAR PLATE: ${car.plate}`;
     let brand = document.createElement('li');
     brand.textContent = `CAR BRAND: ${car.brand}`;
     let color = document.createElement('li');
-    color.textContent = `CAR COLOR: ${car.plate}`;
+    color.textContent = `CAR COLOR: ${car.color}`;
     let wheels = document.createElement('ul');
-
+    wheels.textContent = "WHEELS:"
     car.wheels.forEach(function(wheel,index:number) {
         let li = document.createElement('li');
         li.textContent = `WHEEL ${index} BRAND: ${wheel.brand} WHEEL DIAMETER: ${wheel.diameter}`;
         wheels.appendChild(li);
     })
-    statsList.append(plate,brand,color,wheels);
+
+    let carImg = document.createElement('i');
+    carImg.className = "fas fa-car fa-5x";
+    carImg.style.color = car.color; 
+    statsList.append(plate,brand,color,wheels,carImg);
     carInfo.appendChild(statsList);
     
 }
 
 //Función para mostrar error a la hora de validar los campos
 function showErrors(input:any,error:string,message:string):void{
+
     input.classList.add("is-invalid");
 	let errorDiv = document.getElementById(error);
     if (errorDiv != null){
@@ -98,7 +115,7 @@ function validDiameter(num:number): boolean{
 }
 
 function validPlate(plate:string): boolean{
-    var regex = /^[\d]{4}[\w]{3}/;
+    var regex = /^[\d]{4}[A-Za-z]{3}$/;
 	return regex.test(plate) ? true : false;
 }
 
