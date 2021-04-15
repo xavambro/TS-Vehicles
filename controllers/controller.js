@@ -3,6 +3,7 @@ var formCar = document.forms[0];
 var formWheels = document.forms[1];
 var carInfo = document.getElementById('carInfo');
 var car;
+var cars = [];
 function createCar(plate, brand, color) {
     var errors = 0;
     if (!validPlate(plate)) {
@@ -18,6 +19,7 @@ function createCar(plate, brand, color) {
 function createWheels(wheel1b, wheel1d, wheel2b, wheel2d, wheel3b, wheel3d, wheel4b, wheel4d) {
     var errors = 0;
     var wheels = [];
+    var inputs;
     if (!validDiameter(wheel1d)) {
         showErrors(document.getElementById("wheel1Diameter"), "errorWheel1Diameter", "Diàmetro incorrecto, ha de ser entre 0.4 y 2");
         errors++;
@@ -46,6 +48,14 @@ function createWheels(wheel1b, wheel1d, wheel2b, wheel2d, wheel3b, wheel3d, whee
         for (var i = 0; i < wheels.length; i++) {
             car.addWheel(wheels[i]);
         }
+        cars.push(car);
+        inputs = document.getElementsByTagName("input");
+        formCar.className = "";
+        formWheels.className = "d-none";
+        //Reseteamos los valores de los inputs
+        for (var i = 0; i < inputs.length; i++) {
+            inputs[i].value = '';
+        }
         showCar(car);
     }
 }
@@ -56,14 +66,17 @@ function showCar(car) {
     var brand = document.createElement('li');
     brand.textContent = "CAR BRAND: " + car.brand;
     var color = document.createElement('li');
-    color.textContent = "CAR COLOR: " + car.plate;
+    color.textContent = "CAR COLOR: " + car.color;
     var wheels = document.createElement('ul');
     car.wheels.forEach(function (wheel, index) {
         var li = document.createElement('li');
         li.textContent = "WHEEL " + index + " BRAND: " + wheel.brand + " WHEEL DIAMETER: " + wheel.diameter;
         wheels.appendChild(li);
     });
-    statsList.append(plate, brand, color, wheels);
+    var carImg = document.createElement('i');
+    carImg.className = "fas fa-car fa-5x";
+    carImg.style.color = car.color;
+    statsList.append(plate, brand, color, wheels, carImg);
     carInfo.appendChild(statsList);
 }
 //Función para mostrar error a la hora de validar los campos
@@ -83,6 +96,6 @@ function validDiameter(num) {
     }
 }
 function validPlate(plate) {
-    var regex = /^[\d]{4}[\w]{3}/;
+    var regex = /^[\d]{4}[A-Za-z]{3}$/;
     return regex.test(plate) ? true : false;
 }
