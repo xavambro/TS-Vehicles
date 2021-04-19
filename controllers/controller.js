@@ -2,18 +2,22 @@
 var formCar = document.forms[0];
 var formWheels = document.forms[1];
 var carInfo = document.getElementById('carInfo');
+var plateElement = document.getElementById("plate");
 var car;
 var cars = [];
 function createCar(plate, brand, color) {
     var errors = 0;
     if (!validPlate(plate)) {
-        showErrors(document.getElementById("plate"), "errorPlate", "La matrícula ha de tener 4 números y 3 letras consecutivas");
+        showErrors(plateElement, "errorPlate", "Ha de tener 4 números y 3 letras consecutivas");
         errors++;
     }
     if (errors == 0) {
         car = new Car(plate, color, brand);
         formCar.className = "d-none";
         formWheels.className = "";
+        if (plateElement != null) {
+            plateElement.className = "form-control form-control-sm";
+        }
     }
 }
 function createWheels(wheel1b, wheel1d, wheel2b, wheel2d, wheel3b, wheel3d, wheel4b, wheel4d) {

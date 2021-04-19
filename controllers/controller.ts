@@ -1,7 +1,7 @@
 let formCar: HTMLFormElement = document.forms[0];
 let formWheels: HTMLFormElement = document.forms[1];
 let carInfo:any = document.getElementById('carInfo');
-
+let plateElement = document.getElementById("plate")
 let car:Car;
 let cars: Car[] = [];
 
@@ -10,15 +10,19 @@ function createCar(plate:string,brand:string,color:string):void {
     let errors:number = 0;
 
     if(!validPlate(plate)){
-        showErrors(document.getElementById("plate"),"errorPlate","La matrícula ha de tener 4 números y 3 letras consecutivas");
+        showErrors(plateElement,"errorPlate","Ha de tener 4 números y 3 letras consecutivas");
         errors++;
     }
 
     if(errors ==0){
         car=new Car(plate,color,brand);
         formCar.className = "d-none";
-        formWheels.className = "";  
+        formWheels.className = ""; 
+        if (plateElement != null){
+            plateElement.className = "form-control form-control-sm";
+        }
     }
+    
 }
 
 function createWheels(wheel1b:string,wheel1d:number,wheel2b:string,wheel2d:number,wheel3b:string,wheel3d:number,wheel4b:string,wheel4d:number):void {
@@ -62,6 +66,7 @@ function createWheels(wheel1b:string,wheel1d:number,wheel2b:string,wheel2d:numbe
         for (let i =0; i < inputs.length; i++){
             inputs[i].value = ''
         }
+        
         formCar.className = "";
         formWheels.className = "d-none";
         showCar(car);
